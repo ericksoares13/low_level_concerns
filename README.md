@@ -30,3 +30,11 @@ Para definir os limiares das métricas (LOC e CC), extraímos dados de 20 reposi
 ## Metodologia de Extração
 
 As métricas de **Lines of Code (LOC)** e **Cyclomatic Complexity (CC)** foram extraídas por meio de um *check* personalizado desenvolvido sobre a ferramenta de análise estática [Credo](https://github.com/rrrene/credo).
+
+O arquivo `rules/complex_branching.ex` contém a implementação do *check* utilizado para detectar o *code smell* **Complex Branching**. Para a etapa de definição dos limiares, foi utilizada uma versão desse mesmo *check*, porém sem a condição de validação dos limiares (*thresholds*). Nessa configuração, o *check* apenas percorre todas as funções dos projetos analisados e registra os valores das métricas **LOC** e **CC**, independentemente de a função ser classificada como um *code smell*.
+
+Os valores coletados durante esse processo estão disponíveis em:
+
+- `metrics/ComplexBranching.csv`
+
+Esse arquivo contém, para cada função analisada, o arquivo de origem, o nome da função e os valores das métricas extraídas, sendo utilizado como base para a análise estatística que definiu os limiares do *Complex Branching*.
