@@ -29,12 +29,20 @@ Para definir os limiares das métricas (LOC e CC), extraímos dados de 20 reposi
 
 ## Metodologia de Extração
 
-As métricas de **Lines of Code (LOC)** e **Cyclomatic Complexity (CC)** foram extraídas por meio de um *check* personalizado desenvolvido sobre a ferramenta de análise estática [Credo](https://github.com/rrrene/credo).
+As métricas utilizadas neste trabalho foram extraídas por meio de *checks* personalizados desenvolvidos sobre a ferramenta de análise estática [Credo](https://github.com/rrrene/credo).
 
-O arquivo `rules/complex_branching.ex` contém a implementação do *check* utilizado para detectar o *code smell* **Complex Branching**. Para a etapa de definição dos limiares, foi utilizada uma versão desse mesmo *check*, porém sem a condição de validação dos limiares (*thresholds*). Nessa configuração, o *check* apenas percorre todas as funções dos projetos analisados e registra os valores das métricas **LOC** e **CC**, independentemente de a função ser classificada como um *code smell*.
+O arquivo `rules/complex_branching.ex` contém a implementação do *check* utilizado para detectar o *code smell* **Complex Branching**. Para a etapa de definição dos limiares, foi utilizada uma versão desse mesmo *check*, porém sem a condição de validação dos limiares (*thresholds*). Nessa configuração, o *check* apenas percorre todas as funções dos projetos analisados e registra os valores das métricas **LOC (Lines of Code)** e **CC (Cyclomatic Complexity)**, independentemente de a função ser classificada como um *code smell*.
 
 Os valores coletados durante esse processo estão disponíveis em:
 
 - `metrics/ComplexBranching.csv`
 
 Esse arquivo contém, para cada função analisada, o arquivo de origem, o nome da função e os valores das métricas extraídas, sendo utilizado como base para a análise estatística que definiu os limiares do *Complex Branching*.
+
+De forma análoga, o arquivo `rules/complex_else_clauses_in_with.ex` contém a implementação do *check* utilizado para detectar o *code smell* **Complex Else Clauses in With**. Para a coleta dos dados, foi utilizada uma versão do mesmo *check* sem a validação do limiar, responsável apenas por registrar o valor da métrica **CEC (Clause Else Count)**, definida como o número de cláusulas presentes no bloco `else` de uma expressão `with`.
+
+Os valores coletados estão disponíveis em:
+
+- `metrics/ComplexElseClausesInWith.csv`
+
+Esse arquivo contém, para cada expressão `with ... else` analisada, o arquivo de origem, a função correspondente e o valor de **CEC**, servindo como base para a definição do limiar adotado para o *code smell* **Complex Else Clauses in With**.
