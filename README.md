@@ -1,10 +1,10 @@
 # Replication Package: Code Smells in Elixir
 
-Este repositório contém os dados e scripts complementares para o artigo **"Detecting code smells in Elixir using metrics and predicates for functional programming"**.
+This repository contains the complementary data and scripts for the paper **"Detecting Code Smells in Elixir Using Metrics and Predicates for Functional Programming"**.
 
 ## Benchmark Dataset
 
-Para definir os limiares das métricas (LOC e CC), extraímos dados de 20 repositórios de projetos Elixir populares e de código aberto hospedados no GitHub. Abaixo está a lista completa dos repositórios utilizados para compor o *benchmark*:
+To define the metric thresholds (LOC and CC), we extracted data from 20 popular open-source Elixir project repositories hosted on GitHub. Below is the complete list of repositories used to compose the *benchmark*:
 
 1. [Absinthe](https://github.com/absinthe-graphql/absinthe)
 2. [Analytics](https://github.com/plausible/analytics)
@@ -27,22 +27,22 @@ Para definir os limiares das métricas (LOC e CC), extraímos dados de 20 reposi
 19. [Symphony](https://github.com/openai/symphony)
 20. [Teslamate](https://github.com/adriankumpf/teslamate)
 
-## Metodologia de Extração
+## Extraction Methodology
 
-As métricas utilizadas neste trabalho foram extraídas por meio de *checks* personalizados desenvolvidos sobre a ferramenta de análise estática [Credo](https://github.com/rrrene/credo).
+The metrics used in this work were extracted through custom *checks* developed on top of the static analysis tool [Credo](https://github.com/rrrene/credo).
 
-O arquivo `rules/complex_branching.ex` contém a implementação do *check* utilizado para detectar o *code smell* **Complex Branching**. Para a etapa de definição dos limiares, foi utilizada uma versão desse mesmo *check*, porém sem a condição de validação dos limiares (*thresholds*). Nessa configuração, o *check* apenas percorre todas as funções dos projetos analisados e registra os valores das métricas **LOC (Lines of Code)** e **CC (Cyclomatic Complexity)**, independentemente de a função ser classificada como um *code smell*.
+The file `rules/complex_branching.ex` contains the implementation of the *check* used to detect the **Complex Branching** code smell. For the threshold definition step, a version of this same *check* was used, but without the threshold validation condition. In this configuration, the *check* simply traverses all functions of the analyzed projects and records the values of the **LOC (Lines of Code)** and **CC (Cyclomatic Complexity)** metrics, regardless of whether the function is classified as a code smell.
 
-Os valores coletados durante esse processo estão disponíveis em:
+The values collected during this process are available in:
 
 - `metrics/ComplexBranching.csv`
 
-Esse arquivo contém, para cada função analisada, o arquivo de origem, o nome da função e os valores das métricas extraídas, sendo utilizado como base para a análise estatística que definiu os limiares do *Complex Branching*.
+This file contains, for each analyzed function, the source file, the function name, and the extracted metric values, and was used as the basis for the statistical analysis that defined the thresholds for *Complex Branching*.
 
-De forma análoga, o arquivo `rules/complex_else_clauses_in_with.ex` contém a implementação do *check* utilizado para detectar o *code smell* **Complex Else Clauses in With**. Para a coleta dos dados, foi utilizada uma versão do mesmo *check* sem a validação do limiar, responsável apenas por registrar o valor da métrica **CEC (Clause Else Count)**, definida como o número de cláusulas presentes no bloco `else` de uma expressão `with`.
+Similarly, the file `rules/complex_else_clauses_in_with.ex` contains the implementation of the *check* used to detect the **Complex Else Clauses in With** code smell. For data collection, a version of the same *check* without the threshold validation was used, responsible solely for recording the value of the **CEC (Clause Else Count)** metric, defined as the number of clauses present in the `else` block of a `with` expression.
 
-Os valores coletados estão disponíveis em:
+The collected values are available in:
 
 - `metrics/ComplexElseClausesInWith.csv`
 
-Esse arquivo contém, para cada expressão `with ... else` analisada, o arquivo de origem, a função correspondente e o valor de **CEC**, servindo como base para a definição do limiar adotado para o *code smell* **Complex Else Clauses in With**.
+This file contains, for each analyzed `with ... else` expression, the source file, the corresponding function, and the **CEC** value, serving as the basis for defining the threshold adopted for the **Complex Else Clauses in With** code smell.
