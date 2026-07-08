@@ -27,7 +27,7 @@ defmodule Credo.Check.Warning.ComplexBranching do
     cc = CyclomaticComplexity.complexity_for(ast)
     loc = count_loc(ast, lines)
 
-    if loc > 25 && cc >= 7 do
+    if loc >= 33 && cc >= 8 do
       {ast, [issue_for(issue_meta, line_no, fun_name, loc, cc) | issues]}
     else
       {ast, issues}

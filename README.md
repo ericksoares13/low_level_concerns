@@ -4,7 +4,7 @@ This repository contains the complementary data and scripts for the paper **"Det
 
 ## Benchmark Dataset
 
-To define the metric thresholds (LOC and CC), we extracted data from 20 popular open-source Elixir project repositories hosted on GitHub. Below is the complete list of repositories used to compose the *benchmark*:
+To define the metric thresholds (LOC, CC and CEC), we extracted data from 20 popular open-source Elixir project repositories hosted on GitHub. Below is the complete list of repositories used to compose the *benchmark*:
 
 1. [Absinthe](https://github.com/absinthe-graphql/absinthe)
 2. [Analytics](https://github.com/plausible/analytics)
