@@ -4,6 +4,7 @@ This repository contains the complementary data and scripts for the paper **"Det
 
 ## Repository Structure
 
+```
 low_level_concerns/
 ├── rules/
 │   ├── complex_branching.ex
@@ -16,6 +17,7 @@ low_level_concerns/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+```
 
 ## Setup
 
