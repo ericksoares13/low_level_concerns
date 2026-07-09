@@ -9,6 +9,8 @@ defmodule Credo.Check.Warning.ComplexElseClausesInWith do
       """
     ]
 
+  @cec_threshold 5
+
   @impl Credo.Check
   def run(%SourceFile{} = source_file, params) do
     issue_meta = IssueMeta.for(source_file, params)
@@ -22,7 +24,7 @@ defmodule Credo.Check.Warning.ComplexElseClausesInWith do
 
     with_nodes = find_with_else_nodes(ast)
 
-    if Enum.any?(with_nodes, fn {_, cec} -> cec >= 5 end) do
+    if Enum.any?(with_nodes, fn {_, cec} -> cec >= @cec_threshold end) do
       with_issues =
         Enum.map(with_nodes, fn {with_meta, cec} ->
           issue_for(issue_meta, with_meta[:line] || meta[:line], fun_name, cec)

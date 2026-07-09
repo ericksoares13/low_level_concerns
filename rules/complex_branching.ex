@@ -11,6 +11,9 @@ defmodule Credo.Check.Warning.ComplexBranching do
   alias Credo.Check.Refactor.CyclomaticComplexity
   alias Credo.SourceFile
 
+  @loc_threshold 33
+  @cc_threshold 8
+
   @impl Credo.Check
   def run(%SourceFile{} = source_file, params) do
     issue_meta = IssueMeta.for(source_file, params)
@@ -27,7 +30,7 @@ defmodule Credo.Check.Warning.ComplexBranching do
     cc = CyclomaticComplexity.complexity_for(ast)
     loc = count_loc(ast, lines)
 
-    if loc >= 33 && cc >= 8 do
+    if loc >= @loc_threshold && cc >= @cc_threshold do
       {ast, [issue_for(issue_meta, line_no, fun_name, loc, cc) | issues]}
     else
       {ast, issues}
